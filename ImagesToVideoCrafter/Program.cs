@@ -91,7 +91,10 @@ namespace ImagesToVideoCrafter
             var crafterOptions = SetOptions(ImagesToVideoCrafterOptions.Default, args);
 
             var Crafter = new Crafter(crafterOptions);
-            string FullFileName = Crafter.Craft("Test Video", printInfoAction: Console.WriteLine);
+            string FullFileName = Crafter.Craft(
+                printInfoAction: Console.WriteLine,
+                printDebugAction: Console.WriteLine
+                );
 
             Console.WriteLine("Done. \nVideo saved: " + FullFileName);
             Console.ReadKey(true);

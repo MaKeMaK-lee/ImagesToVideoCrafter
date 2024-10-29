@@ -15,9 +15,15 @@ namespace ImagesToVideoCrafter
             CrafterOptions = crafterOptions ?? ImagesToVideoCrafterOptions.Default;
         }
 
-        public string Craft(string outputFileNameWithoutExtension = "Video", bool addDateTimeToFilename = true, Action<string>? printInfoAction = null)
+        public string Craft(string? outputFileNameWithoutExtension = null, bool addDateTimeToFilename = true, Action<string>? printInfoAction = null, Action<string>? printDebugAction = null)
         {
+            if (CrafterOptions.DebugMode)
+            {
+                printDebugAction?.Invoke("[DEBUG] Craft started with opTions:\n" + CrafterOptions.GetJson());
+            }
+
             //Correct options
+            outputFileNameWithoutExtension ??= CrafterOptions.OutputVideoName;
             if (!CrafterOptions.UseFramerate)
             {
                 printInfoAction?.Invoke("[INFO] При использовании времени на кадр FrameMilliseconds вместо частоты кадров Framerate (UseFramerate = true)" +
@@ -71,6 +77,12 @@ namespace ImagesToVideoCrafter
             TimeSpan currentFrameTime = TimeSpan.Zero;
             foreach (var imageFile in imageFiles)
             {
+                if (CrafterOptions.DebugMode)
+                {
+                    printDebugAction?.Invoke("[DEBUG] Start processing frame of file " + imageFile);
+                }
+
+
                 if (CrafterOptions.UseFramerate)
                 {
                     var bitmap = ((Bitmap)Bitmap.FromFile(imageFile));
@@ -84,6 +96,11 @@ namespace ImagesToVideoCrafter
                     bitmap.UnlockBits(bitLock!);
 
                     currentFrameTime += TimeSpan.FromMilliseconds(CrafterOptions.FrameMilliseconds);
+                }
+
+                if (CrafterOptions.DebugMode)
+                {
+                    printDebugAction?.Invoke("[DEBUG] End processing frame.");
                 }
 
                 framesAdded++;

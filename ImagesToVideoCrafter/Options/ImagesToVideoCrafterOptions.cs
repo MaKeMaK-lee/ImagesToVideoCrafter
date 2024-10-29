@@ -1,4 +1,6 @@
-﻿namespace ImagesToVideoCrafter.Options
+﻿using System.Text.Json;
+
+namespace ImagesToVideoCrafter.Options
 {
     public class ImagesToVideoCrafterOptions
     {
@@ -62,6 +64,15 @@
                     DebugMode = false,
                 };
             }
+        }
+
+        public string GetJson()
+        {
+            return JsonSerializer.Serialize(this, options: new()
+            {
+                IgnoreReadOnlyProperties = true,
+                WriteIndented = true
+            });
         }
     }
 }
