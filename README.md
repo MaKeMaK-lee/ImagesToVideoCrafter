@@ -17,17 +17,19 @@
 ##### Основные
 |Параметр|Описание|По умолчанию|Допустимые|
 |---|---|---|---|
-|FFmpegBinaresDirectory|Директория, в которой находятся ffmpeg shared .dll файлы: avcodec, avformat, avutil, swresample, swscale.|`C:\ffmpeg\x86_64`|`[том]:\[имя]\[имя]`|
-|OutputDirectory|Директория, куда будет помещён создаваемый видео файл.|`C:\ImagesToVideoCrafter\Out`|`[том]:\[имя]\[имя]`|
+|FFmpegBinaresDirectory|Директория, в которой находятся ffmpeg shared .dll файлы: avcodec, avformat, avutil, swresample, swscale.|ffmpeg\x86_64||
+|OutputVideoName|Имя создаваемого видео файла **без расширения файла**.|Video||
+|OutputDirectory|Директория, куда будет помещён создаваемый видео файл.|VideoResults||
 |ReverseInputFilesOrder|Определяет, следует ли добавить к имени файла информацию о параметрах видео.|false|true / false|
 |AddVideoInfoToFilename|Определяет, следует ли инверсировать порядок кадров.|false|true / false|
-|InputDirectory|Директория, откуда будут взяты кадры для видео.|`C:\ImagesToVideoCrafter\In`|`[том]:\[имя]\[имя]`|
+|InputDirectory|Директория, откуда будут взяты кадры для видео.|FramesSource||
+|DebugMode|Определяет, использовать ли режим отладки (выводить ли отладочные сообщения и т.п.).|false|true / false|
 ##### Видео
 |Параметр|Описание|По умолчанию|Допустимые|
 |---|---|---|---|
 |FrameMilliseconds|Длительность одного кадра в миллисекундах.|41.666666666666666666666666666667|(c# double parse from string)|
 |Framerate|Частота кадров. Не используется, если не установить UseFramerate true.|24||
-|UseFramerate| Флаг, определяющий, нужно ли игнорировать значение FrameMilliseconds и использовать только Framerate.|false|true / false|
+|UseFramerate| Определяет, нужно ли игнорировать значение FrameMilliseconds и использовать только Framerate.|false|true / false|
 |CRF|Constant Rate Factor. Имеет значение для только для кодеков x264 и x265.|17|0–51 (0 - без потерь качества, большой размер; 51 - худшее качество, малый размер)|
 |Width|Ширина видео.|1920||
 |Height|Ширина видео.|1080||
@@ -43,5 +45,6 @@
 Рекомендуемый вариант: запускаете .exe через .bat, не забыв указать верный путь к .dll файлам.  
 Пример .bat файла:
 
-    ImagesToVideoCrafter.exe -FFmpegBinaresDirectory C:\Users\Username\Desktop\ffmpeg\x86_64 -OutputDirectory C:\Users\Username\Desktop -ReverseInputFilesOrder false -InputDirectory C:\Users\Username\Desktop\frames -FrameMilliseconds 41.666666666666666666666666666667 -Framerate 24 -UseFramerate false -CRF 17 -Width 1920 -Height 1080 -EncoderPresetSpeed 1 -Codec H264 -AddVideoInfoToFilename true
+    ImagesToVideoCrafter.exe -FFmpegBinaresDirectory ffmpeg\x86_64 -OutputDirectory C:\Users\%username%\Desktop -ReverseInputFilesOrder false -InputDirectory Frames -FrameMilliseconds 41.666666666666666666666666666667 -Framerate 24 -UseFramerate false -CRF 17 -Width 1920 -Height 1080 -EncoderPresetSpeed 4 -Codec H264 -AddVideoInfoToFilename false
     pause
+     
