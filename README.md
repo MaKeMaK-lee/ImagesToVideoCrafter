@@ -17,13 +17,15 @@
 ##### Основные
 |Параметр|Описание|По умолчанию|Допустимые|
 |---|---|---|---|
-|FFmpegBinaresDirectory|Директория, в которой находятся ffmpeg shared .dll файлы: avcodec, avformat, avutil, swresample, swscale.|ffmpeg\x86_64||
+|FFmpegBinaresDirectory|Директория, в которой находятся ffmpeg shared .dll файлы: avcodec, avformat, avutil, swresample, swscale.|ffmpeg\x86_64|*|
 |OutputVideoName|Имя создаваемого видео файла **без расширения файла**.|Video||
-|OutputDirectory|Директория, куда будет помещён создаваемый видео файл.|VideoResults||
+|OutputDirectory|Директория, куда будет помещён создаваемый видео файл.|VideoResults|*|
 |ReverseInputFilesOrder|Определяет, следует ли добавить к имени файла информацию о параметрах видео.|false|true / false|
 |AddVideoInfoToFilename|Определяет, следует ли инверсировать порядок кадров.|false|true / false|
-|InputDirectory|Директория, откуда будут взяты кадры для видео.|FramesSource||
+|InputDirectory|Директория, откуда будут взяты кадры для видео.|FramesSource|*|
 |DebugMode|Определяет, использовать ли режим отладки (выводить ли отладочные сообщения и т.п.).|false|true / false|
+
+**Все пути можно указывать в форматах: C:\example\example , C:\\\example\\\example , "C:\example with spaces\example" , subfolder , subfolder\example , subfolder\\\example , "subfolder with spaces" , ну вы поняли...*
 ##### Видео
 |Параметр|Описание|По умолчанию|Допустимые|
 |---|---|---|---|
