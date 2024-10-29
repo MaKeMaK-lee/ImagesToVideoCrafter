@@ -21,6 +21,10 @@ namespace ImagesToVideoCrafter
                             argsEnumerator.MoveNext();
                             options.OutputDirectory = (string)argsEnumerator.Current;
                             break;
+                        case "-OutputVideoName":
+                            argsEnumerator.MoveNext();
+                            options.OutputVideoName = (string)argsEnumerator.Current;
+                            break;
                         case "-ReverseInputFilesOrder":
                             argsEnumerator.MoveNext();
                             options.ReverseInputFilesOrder = bool.Parse((string)argsEnumerator.Current);
@@ -64,6 +68,10 @@ namespace ImagesToVideoCrafter
                         case "-Codec":
                             argsEnumerator.MoveNext();
                             options.Codec = (string)argsEnumerator.Current;
+                            break;
+                        case "-DebugMode":
+                            argsEnumerator.MoveNext();
+                            options.DebugMode = bool.Parse((string)argsEnumerator.Current);
                             break;
                         default:
 

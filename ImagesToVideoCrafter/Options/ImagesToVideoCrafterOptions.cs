@@ -6,6 +6,7 @@
         /// Path to FFMPEG binares (FMPEG shared .dll files: avcodec, avformat, avutil, swresample, swscale). When write this version is 6.x
         /// </summary>
         public required string FFmpegBinaresDirectory { get; set; }
+        public required string OutputVideoName { get; set; }
         public required string OutputDirectory { get; set; }
         public required bool AddVideoInfoToFilename { get; set; }
         public required bool ReverseInputFilesOrder { get; set; }
@@ -31,6 +32,8 @@
         public required short EncoderPresetSpeed { get; set; }
         public required string Codec { get; set; }
 
+        public required bool DebugMode { get; set; }
+
         /// <returns>
         /// Новый экземпляр со значениями по умолчанию
         /// </returns>...
@@ -41,6 +44,7 @@
                 return new ImagesToVideoCrafterOptions()
                 {
                     FFmpegBinaresDirectory = "C:\\ffmpeg\\x86_64",
+                    OutputVideoName = "Video",
                     OutputDirectory = "C:\\ImagesToVideoCrafter\\Out",
                     AddVideoInfoToFilename = false,
                     ReverseInputFilesOrder = false,
@@ -54,6 +58,8 @@
                     CRF = 17,
                     EncoderPresetSpeed = 4,
                     Codec = "H264",
+
+                    DebugMode = false,
                 };
             }
         }
