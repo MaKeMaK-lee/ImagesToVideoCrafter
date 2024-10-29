@@ -62,6 +62,7 @@ namespace ImagesToVideoCrafter
 
             //Start crafting
             Directory.CreateDirectory(CrafterOptions.OutputDirectory);
+            Directory.CreateDirectory(CrafterOptions.InputDirectory);
             string FullFileName = Path.Combine(CrafterOptions.OutputDirectory, outputFileName);
 
             FFmpegLoader.FFmpegPath = CrafterOptions.FFmpegBinaresDirectory;
@@ -69,7 +70,7 @@ namespace ImagesToVideoCrafter
             var settings = CrafterOptions.GetVideoEncoderSettings();
 
             using var file = MediaBuilder
-                .CreateContainer(FullFileName)
+                .CreateContainer(Path.GetFullPath(FullFileName))
                 .WithVideo(settings)
                 .Create();
 
