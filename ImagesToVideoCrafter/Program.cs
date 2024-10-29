@@ -112,11 +112,12 @@ namespace ImagesToVideoCrafter
 
             var Crafter = new Crafter(crafterOptions);
             string FullFileName = Crafter.Craft(
-                printInfoAction: Console.WriteLine,
-                printDebugAction: Console.WriteLine
+                printInfoAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [INFO] " + s),
+                printWarningAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [WARN] " + s),
+                printDebugAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [DEBUG] " + s)
                 );
 
-            Console.WriteLine("Done. \nVideo saved: " + FullFileName);
+            Console.WriteLine("\n\n\nDone. \nVideo saved: " + FullFileName + "\n");
             Console.ReadKey(true);
         }
     }
