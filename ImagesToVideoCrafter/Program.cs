@@ -88,6 +88,26 @@ namespace ImagesToVideoCrafter
 
         public static void Main(string[] args)
         {
+#if DEBUG
+            string username = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Split('\\')[1];
+            args = [
+                "-FFmpegBinaresDirectory","C:\\Users\\"+username+"\\Desktop\\ffmpeg\\x86_64" ,
+                "-OutputVideoName","test video" ,
+                "-OutputDirectory","C:\\Users\\"+username+"\\Desktop\\resultVideos" ,
+                "-ReverseInputFilesOrder","false" ,
+                "-InputDirectory","C:\\Users\\"+username+"\\Desktop\\testImages" ,
+                "-FrameMilliseconds","41.666666666666666666666666666667" ,
+                "-Framerate","24" ,
+                "-UseFramerate false" ,
+                "-CRF","17" ,
+                "-Width","1920" ,
+                "-Height","1080" ,
+                "-EncoderPresetSpeed","4" ,
+                "-Codec","H264" ,
+                "-AddVideoInfoToFilename","false" ,
+                "-DebugMode","true" ,
+                ];
+#endif
             var crafterOptions = SetOptions(ImagesToVideoCrafterOptions.Default, args);
 
             var Crafter = new Crafter(crafterOptions);
