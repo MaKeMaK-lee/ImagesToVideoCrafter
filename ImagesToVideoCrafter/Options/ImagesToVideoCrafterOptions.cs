@@ -45,12 +45,13 @@ namespace ImagesToVideoCrafter.Options
             {
                 return new ImagesToVideoCrafterOptions()
                 {
-                    FFmpegBinaresDirectory = "C:\\ffmpeg\\x86_64",
+                    FFmpegBinaresDirectory = "ffmpeg\\x86_64",
                     OutputVideoName = "Video",
-                    OutputDirectory = "C:\\ImagesToVideoCrafter\\Out",
+                    OutputDirectory = "VideoResults",
                     AddVideoInfoToFilename = false,
                     ReverseInputFilesOrder = false,
-                    InputDirectory = "C:\\ImagesToVideoCrafter\\In",
+                    InputDirectory = "FramesSource",
+                    DebugMode = false,
 
                     FrameMilliseconds = 1000 / 24,
                     Framerate = 24,
@@ -61,7 +62,6 @@ namespace ImagesToVideoCrafter.Options
                     EncoderPresetSpeed = 4,
                     Codec = "H264",
 
-                    DebugMode = false,
                 };
             }
         }

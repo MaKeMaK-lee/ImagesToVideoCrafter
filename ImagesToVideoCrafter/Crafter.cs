@@ -46,7 +46,7 @@ namespace ImagesToVideoCrafter
             {
                 var now = DateTime.Now;
                 outputFileNameWithoutExtension +=
-                    $" {now.Year}-{now.Month}-{now.Day} {now.Hour}-{now.Minute}-{now.Second}.";
+                    $" {now.Year}-{now.Month}-{now.Day} {now.Hour:00}-{now.Minute:00}-{now.Second:00}.";
             }
             if (CrafterOptions.AddVideoInfoToFilename)
             {
@@ -58,7 +58,7 @@ namespace ImagesToVideoCrafter
                     ", " + CrafterOptions.EncoderPresetSpeed + " encoder speed (0 - speed, 8 - size)" +
                     ", " + CrafterOptions.CRF + " CRF (0 - quality, 51 - size).";
             }
-            string outputFileName = outputFileNameWithoutExtension + ".mp4";
+            string outputFileName = outputFileNameWithoutExtension + "mp4";
 
             //Start crafting
             Directory.CreateDirectory(CrafterOptions.OutputDirectory);
