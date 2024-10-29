@@ -3,7 +3,7 @@
     public class ImagesToVideoCrafterOptions
     {
         /// <summary>
-        /// Path to FFMPEG binares (FMPEG shared .dll files: avcodec,avformat,avutil,swresample,swscale). When write this version is 6.x
+        /// Path to FFMPEG binares (FMPEG shared .dll files: avcodec, avformat, avutil, swresample, swscale). When write this version is 6.x
         /// </summary>
         public required string FFmpegBinaresDirectory { get; set; }
         public required string OutputDirectory { get; set; }
