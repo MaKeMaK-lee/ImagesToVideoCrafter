@@ -43,10 +43,11 @@ namespace ImagesToVideoCrafter
             {
                 outputFileNameWithoutExtension +=
                     " Options - " + CrafterOptions.Width + "x" + CrafterOptions.Height +
-                    ", ~" + CrafterOptions.Framerate + " fps" +
+                    ", ~" + CrafterOptions.FrameMilliseconds + " fps" +
+                    ", ~" + CrafterOptions.Framerate + " fps " + (CrafterOptions.UseFramerate ? "(used)" : "(unused)") +
                     ", " + CrafterOptions.Codec + " codec" +
-                    ", " + CrafterOptions.EncoderPresetSpeed + " encoder speed (0 - speed, 8 - quality)" +
-                    ", " + CrafterOptions.EncoderPresetSpeed + " CRF (constant rate factor supports only H.264 and H.265 codecs).";
+                    ", " + CrafterOptions.EncoderPresetSpeed + " encoder speed (0 - speed, 8 - size)" +
+                    ", " + CrafterOptions.CRF + " CRF (0 - quality, 51 - size).";
             }
             string outputFileName = outputFileNameWithoutExtension + ".mp4";
 
