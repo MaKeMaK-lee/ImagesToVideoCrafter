@@ -7,6 +7,7 @@
         /// </summary>
         public required string FFmpegBinaresDirectory { get; set; }
         public required string OutputDirectory { get; set; }
+        public required bool AddVideoInfoToFilename { get; set; }
         public required bool ReverseInputFilesOrder { get; set; }
         public required string InputDirectory { get; set; }
 
@@ -39,10 +40,11 @@
             {
                 return new ImagesToVideoCrafterOptions()
                 {
-                    FFmpegBinaresDirectory = "\\ffmpeg\\x86_64",
-                    OutputDirectory = "\\Out",
+                    FFmpegBinaresDirectory = "C:\\ffmpeg\\x86_64",
+                    OutputDirectory = "C:\\ImagesToVideoCrafter\\Out",
+                    AddVideoInfoToFilename = false,
                     ReverseInputFilesOrder = false,
-                    InputDirectory = "\\In",
+                    InputDirectory = "C:\\ImagesToVideoCrafter\\In",
 
                     FrameMilliseconds = 1000 / 24,
                     Framerate = 24,

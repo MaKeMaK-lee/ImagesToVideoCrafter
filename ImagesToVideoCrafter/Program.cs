@@ -25,6 +25,10 @@ namespace ImagesToVideoCrafter
                             argsEnumerator.MoveNext();
                             options.ReverseInputFilesOrder = bool.Parse((string)argsEnumerator.Current);
                             break;
+                        case "-AddVideoInfoToFilename":
+                            argsEnumerator.MoveNext();
+                            options.AddVideoInfoToFilename = bool.Parse((string)argsEnumerator.Current);
+                            break;
                         case "-InputDirectory":
                             argsEnumerator.MoveNext();
                             options.InputDirectory = (string)argsEnumerator.Current;
@@ -79,7 +83,7 @@ namespace ImagesToVideoCrafter
             var crafterOptions = SetOptions(ImagesToVideoCrafterOptions.Default, args);
 
             var Crafter = new Crafter(crafterOptions);
-            string FullFileName = Crafter.Craft("Test Video", addInfoToFilename: true, printInfoAction: Console.WriteLine);
+            string FullFileName = Crafter.Craft("Test Video", printInfoAction: Console.WriteLine);
 
             Console.WriteLine("Done. \nVideo saved: " + FullFileName);
             Console.ReadKey(true);

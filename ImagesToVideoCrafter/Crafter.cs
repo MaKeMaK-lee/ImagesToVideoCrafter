@@ -15,25 +15,9 @@ namespace ImagesToVideoCrafter
             CrafterOptions = crafterOptions ?? ImagesToVideoCrafterOptions.Default;
         }
 
-        public string Craft(string outputFileNameWithoutExtension = "Video", bool addDateTimeToFilename = true, bool addInfoToFilename = false, Action<string>? printInfoAction = null)
+        public string Craft(string outputFileNameWithoutExtension = "Video", bool addDateTimeToFilename = true, Action<string>? printInfoAction = null)
         {
-            if (addDateTimeToFilename)
-            {
-                var now = DateTime.Now;
-                outputFileNameWithoutExtension +=
-                    $" {now.Year}-{now.Month}-{now.Day} {now.Hour}-{now.Minute}-{now.Second}.";
-            }
-            if (addInfoToFilename)
-            {
-                outputFileNameWithoutExtension +=
-                    " Options - " + CrafterOptions.Width + "x" + CrafterOptions.Height +
-                    ", ~" + CrafterOptions.Framerate + " fps" +
-                    ", " + CrafterOptions.Codec + " codec" +
-                    ", " + CrafterOptions.EncoderPresetSpeed + " encoder speed (0 - speed, 8 - quality)" +
-                    ", " + CrafterOptions.EncoderPresetSpeed + " CRF (constant rate factor supports only H.264 and H.265 codecs).";
-            }
-            string outputFileName = outputFileNameWithoutExtension + ".mp4";
-
+            //Correct options
             if (!CrafterOptions.UseFramerate)
             {
                 printInfoAction?.Invoke("[INFO] При использовании времени на кадр FrameMilliseconds вместо частоты кадров Framerate (UseFramerate = true)" +
@@ -48,7 +32,28 @@ namespace ImagesToVideoCrafter
                 }
             }
 
+            //Edit filename
+            if (addDateTimeToFilename)
+            {
+                var now = DateTime.Now;
+                outputFileNameWithoutExtension +=
+                    $" {now.Year}-{now.Month}-{now.Day} {now.Hour}-{now.Minute}-{now.Second}.";
+            }
+            if (CrafterOptions.AddVideoInfoToFilename)
+            {
+                outputFileNameWithoutExtension +=
+                    " Options - " + CrafterOptions.Width + "x" + CrafterOptions.Height +
+                    ", ~" + CrafterOptions.Framerate + " fps" +
+                    ", " + CrafterOptions.Codec + " codec" +
+                    ", " + CrafterOptions.EncoderPresetSpeed + " encoder speed (0 - speed, 8 - quality)" +
+                    ", " + CrafterOptions.EncoderPresetSpeed + " CRF (constant rate factor supports only H.264 and H.265 codecs).";
+            }
+            string outputFileName = outputFileNameWithoutExtension + ".mp4";
+
+            //Start crafting
+            Directory.CreateDirectory(CrafterOptions.OutputDirectory);
             string FullFileName = Path.Combine(CrafterOptions.OutputDirectory, outputFileName);
+
             FFmpegLoader.FFmpegPath = CrafterOptions.FFmpegBinaresDirectory;
 
             var settings = CrafterOptions.GetVideoEncoderSettings();
