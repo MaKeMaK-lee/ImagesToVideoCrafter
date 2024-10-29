@@ -110,6 +110,8 @@ namespace ImagesToVideoCrafter
 #endif
             var crafterOptions = SetOptions(ImagesToVideoCrafterOptions.Default, args);
 
+            DateTime startTime = DateTime.Now;
+
             var Crafter = new Crafter(crafterOptions);
             string FullFileName = Crafter.Craft(
                 printInfoAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [INFO] " + s),
@@ -117,7 +119,13 @@ namespace ImagesToVideoCrafter
                 printDebugAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [DEBUG] " + s)
                 );
 
-            Console.WriteLine("\n\n\nDone. \nVideo saved: " + FullFileName + "\n");
+            var time = (DateTime.Now - startTime);
+            Console.WriteLine("\n\n\nDone " +
+                (time.Hours == 0 ? "" : (time.Hours + "h ")) +
+                (time.Minutes == 0 ? "" : (time.Minutes + "m ")) +
+                time.Seconds + "." + time.Milliseconds + "s" +
+                "\n" +
+                "Video saved: " + FullFileName + "\n");
             Console.ReadKey(true);
         }
     }
