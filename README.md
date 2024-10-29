@@ -37,7 +37,8 @@
 Убедитесь, что вас устраивает сортировка кадров по имени файла.  
 Убедитесь, в директории кадров нет иных файлов.  
 ### Собственно запуск
-Рекомендуемый вариант: запускаете .exe через .bat, не забыв указать верный путь к .dll файлам. Пример .bat файла:
+Рекомендуемый вариант: запускаете .exe через .bat, не забыв указать верный путь к .dll файлам.  
+Пример .bat файла:
 
     ImagesToVideoCrafter.exe -FFmpegBinaresDirectory C:\Users\Username\Desktop\ffmpeg\x86_64 -OutputDirectory C:\Users\Username\Desktop -ReverseInputFilesOrder false -InputDirectory C:\Users\Username\Desktop\frames -FrameMilliseconds 41.666666666666666666666666666667 -Framerate 24 -UseFramerate false -CRF 17 -Width 1920 -Height 1080 -EncoderPresetSpeed 1 -Codec H264 -AddVideoInfoToFilename true
     pause
