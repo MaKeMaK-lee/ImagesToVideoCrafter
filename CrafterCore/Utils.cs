@@ -1,6 +1,4 @@
-﻿using CrafterCore.Options;
-using FFMediaToolkit.Encoding;
-using FFMediaToolkit.Graphics;
+﻿using FFMediaToolkit.Graphics;
 using System.Drawing;
 using System.Drawing.Imaging;
 
@@ -8,7 +6,7 @@ namespace CrafterCore
 {
     public static class Utils
     {
-        
+
 
         public static ImageData ToImageData(this Bitmap bitmap, out BitmapData? bitLock)
         {

@@ -1,6 +1,10 @@
 ﻿using CrafterCore;
 using CrafterCore.Options;
 
+#if DEBUG
+using System.Security.Principal;
+#endif
+
 namespace ImagesToVideoCrafter
 {
     public class Program
@@ -90,7 +94,7 @@ namespace ImagesToVideoCrafter
         public static void Main(string[] args)
         {
 #if DEBUG
-            string username = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Split('\\')[1];
+            string username = WindowsIdentity.GetCurrent().Name.Split('\\')[1];
             args = [
                 "-FFmpegBinaresDirectory","C:\\Users\\"+username+"\\Desktop\\ffmpeg\\x86_64" ,
                 "-OutputVideoName","test video" ,
