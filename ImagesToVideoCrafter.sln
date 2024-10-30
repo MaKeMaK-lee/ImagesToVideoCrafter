@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagesToVideoCrafter", "ImagesToVideoCrafter\ImagesToVideoCrafter.csproj", "{995F2AC9-BD04-41AF-8673-7019C764A3ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImagesToVideoCrafter", "ImagesToVideoCrafter\ImagesToVideoCrafter.csproj", "{995F2AC9-BD04-41AF-8673-7019C764A3ED}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AED5727C-0364-43A5-B782-8B18D9404FAF} = {AED5727C-0364-43A5-B782-8B18D9404FAF}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrafterCore", "CrafterCore\CrafterCore.csproj", "{AED5727C-0364-43A5-B782-8B18D9404FAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{995F2AC9-BD04-41AF-8673-7019C764A3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{995F2AC9-BD04-41AF-8673-7019C764A3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{995F2AC9-BD04-41AF-8673-7019C764A3ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AED5727C-0364-43A5-B782-8B18D9404FAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED5727C-0364-43A5-B782-8B18D9404FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED5727C-0364-43A5-B782-8B18D9404FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED5727C-0364-43A5-B782-8B18D9404FAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

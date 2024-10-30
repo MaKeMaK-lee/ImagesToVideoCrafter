@@ -1,10 +1,10 @@
 ﻿using FFMediaToolkit;
 using FFMediaToolkit.Encoding;
-using ImagesToVideoCrafter.Options;
+using CrafterCore.Options;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace ImagesToVideoCrafter
+namespace CrafterCore
 {
     public class Crafter
     {

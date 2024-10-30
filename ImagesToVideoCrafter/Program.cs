@@ -1,4 +1,5 @@
-﻿using ImagesToVideoCrafter.Options;
+﻿using CrafterCore;
+using CrafterCore.Options;
 
 namespace ImagesToVideoCrafter
 {
@@ -112,8 +113,8 @@ namespace ImagesToVideoCrafter
 
             DateTime startTime = DateTime.Now;
 
-            var Crafter = new Crafter(crafterOptions);
-            string FullFileName = Crafter.Craft(
+            var crafter = new Crafter(crafterOptions);
+            string FullFileName = crafter.Craft(
                 printInfoAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [INFO] " + s),
                 printWarningAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [WARN] " + s),
                 printDebugAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [DEBUG] " + s)
