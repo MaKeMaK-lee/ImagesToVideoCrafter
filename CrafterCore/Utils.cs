@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace CrafterCore
+namespace ImagesToVideoCrafter_Core
 {
     public static class Utils
     {

@@ -1,7 +1,7 @@
 ﻿using FFMediaToolkit.Encoding;
 using System.Text.Json;
 
-namespace CrafterCore.Options
+namespace ImagesToVideoCrafter_Core.Options
 {
     public class ImagesToVideoCrafterOptions
     {

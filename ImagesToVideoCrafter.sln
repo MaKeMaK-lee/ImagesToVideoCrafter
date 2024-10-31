@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImagesToVideoCrafter", "Ima
 		{AED5727C-0364-43A5-B782-8B18D9404FAF} = {AED5727C-0364-43A5-B782-8B18D9404FAF}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrafterCore", "CrafterCore\CrafterCore.csproj", "{AED5727C-0364-43A5-B782-8B18D9404FAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImagesToVideoCrafter_Core", "CrafterCore\ImagesToVideoCrafter_Core.csproj", "{AED5727C-0364-43A5-B782-8B18D9404FAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

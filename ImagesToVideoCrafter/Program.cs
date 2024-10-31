@@ -1,5 +1,5 @@
-﻿using CrafterCore;
-using CrafterCore.Options;
+﻿using ImagesToVideoCrafter_Core;
+using ImagesToVideoCrafter_Core.Options;
 
 #if DEBUG
 using System.Security.Principal;
@@ -110,7 +110,7 @@ namespace ImagesToVideoCrafter
                 "-EncoderPresetSpeed","4" ,
                 "-Codec","H264" ,
                 "-AddVideoInfoToFilename","false" ,
-                "-DebugMode","true" ,
+                "-DebugMode","false" ,
                 ];
 #endif
             var crafterOptions = SetOptions(ImagesToVideoCrafterOptions.Default, args);
