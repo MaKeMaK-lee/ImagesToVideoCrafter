@@ -1,7 +1,6 @@
-﻿using FFMediaToolkit.Encoding;
-using System.Text.Json;
+﻿using System.Text.Json;
 
-namespace ImagesToVideoCrafter_Core.Options
+namespace ImagesToVideoCrafter_Options
 {
     public class ImagesToVideoCrafterOptions
     {
@@ -66,37 +65,6 @@ namespace ImagesToVideoCrafter_Core.Options
                 };
             }
         }
-
-        public VideoEncoderSettings GetVideoEncoderSettings() =>
-            new VideoEncoderSettings(
-                width: this!.Width,
-                height: this.Height,
-                framerate: this.Framerate)
-            {
-                Codec = this.Codec switch
-                {
-                    "H264" => VideoCodec.H264,
-                    "H265" => VideoCodec.H265,
-                    "MPEG4" => VideoCodec.MPEG4,
-
-                    _ => throw new Exception("Failed to create FFMPEG VideoEncoderSettings (wrong codec option)."),
-                },
-                EncoderPreset = this.EncoderPresetSpeed switch
-                {
-                    0 => EncoderPreset.UltraFast,
-                    1 => EncoderPreset.SuperFast,
-                    2 => EncoderPreset.VeryFast,
-                    3 => EncoderPreset.Faster,
-                    4 => EncoderPreset.Fast,
-                    5 => EncoderPreset.Medium,
-                    6 => EncoderPreset.Slow,
-                    7 => EncoderPreset.Slower,
-                    8 => EncoderPreset.VerySlow,
-
-                    _ => throw new Exception("Failed to create FFMPEG VideoEncoderSettings (wrong encoder preset option)."),
-                },
-                CRF = this.CRF,
-            };
 
         public string GetJson()
         {

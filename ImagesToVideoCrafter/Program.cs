@@ -1,5 +1,5 @@
 ﻿using ImagesToVideoCrafter_Core;
-using ImagesToVideoCrafter_Core.Options;
+using ImagesToVideoCrafter_Options;
 
 #if DEBUG
 using System.Security.Principal;

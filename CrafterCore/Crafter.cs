@@ -1,6 +1,6 @@
 ﻿using FFMediaToolkit;
 using FFMediaToolkit.Encoding;
-using ImagesToVideoCrafter_Core.Options;
+using ImagesToVideoCrafter_Options;
 using System.Drawing;
 using System.Drawing.Imaging;
 
