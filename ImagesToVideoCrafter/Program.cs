@@ -110,7 +110,7 @@ namespace ImagesToVideoCrafter
                 "-EncoderPresetSpeed","4" ,
                 "-Codec","H264" ,
                 "-AddVideoInfoToFilename","false" ,
-                "-DebugMode","false" ,
+                "-DebugMode","true" ,
                 ];
 #endif
             var crafterOptions = SetOptions(ImagesToVideoCrafterOptions.Default, args);
@@ -121,7 +121,7 @@ namespace ImagesToVideoCrafter
             string FullFileName = crafter.Craft(
                 printInfoAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [INFO] " + s),
                 printWarningAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [WARN] " + s),
-                printDebugAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [DEBUG] " + s)
+                printDebugAction: (s) => { if (crafterOptions.DebugMode) Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [DEBUG] " + s); }
                 );
 
             var time = (DateTime.Now - startTime);

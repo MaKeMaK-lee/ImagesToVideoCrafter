@@ -1,18 +1,34 @@
 ﻿using FFMediaToolkit;
 using FFMediaToolkit.Encoding;
+using ImagesToVideoCrafter_Core.Extensions;
+using ImagesToVideoCrafter_ImageProcessor.DarknessDetection;
 using ImagesToVideoCrafter_Options;
 using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace ImagesToVideoCrafter_Core
 {
-    public class Crafter
+    public class Crafter(ImagesToVideoCrafterOptions? crafterOptions = null)
     {
-        public ImagesToVideoCrafterOptions CrafterOptions { get; private set; }
+        private TimeSpan CurrentCraftCurrentFrameTime;
+        private readonly DarknessDetector DarknessDetector = new();
 
-        public Crafter(ImagesToVideoCrafterOptions? crafterOptions = null)
+        public ImagesToVideoCrafterOptions CrafterOptions { get; private set; } = crafterOptions ?? ImagesToVideoCrafterOptions.Default;
+
+        public void AddFrame(MediaOutput file, Bitmap bitmap)
         {
-            CrafterOptions = crafterOptions ?? ImagesToVideoCrafterOptions.Default;
+            if (CrafterOptions.UseFramerate)
+            {
+                file.Video.AddFrame(bitmap.ToImageData(out BitmapData? bitLock));
+                bitmap.UnlockBits(bitLock!);
+            }
+            else
+            {
+                file.Video.AddFrame(bitmap.ToImageData(out BitmapData? bitLock), CurrentCraftCurrentFrameTime);
+                bitmap.UnlockBits(bitLock!);
+
+                CurrentCraftCurrentFrameTime += TimeSpan.FromMilliseconds(CrafterOptions.FrameMilliseconds);
+            }
         }
 
         public string Craft(string? outputFileNameWithoutExtension = null, bool addDateTimeToFilename = true,
@@ -20,10 +36,7 @@ namespace ImagesToVideoCrafter_Core
             Action<string>? printWarningAction = null,
             Action<string>? printDebugAction = null)
         {
-            if (CrafterOptions.DebugMode)
-            {
-                printDebugAction?.Invoke("Craft started with opTions:\n" + CrafterOptions.GetJson());
-            }
+            printDebugAction?.Invoke("Craft started with opTions:\n" + CrafterOptions.GetJson());
 
             //Correct options
             outputFileNameWithoutExtension ??= CrafterOptions.OutputVideoName;
@@ -75,40 +88,38 @@ namespace ImagesToVideoCrafter_Core
                 .Create();
 
             var imageFiles = Directory.EnumerateFiles(CrafterOptions.InputDirectory);
+            var imageFilesCount = imageFiles.Count();
+
             imageFiles = CrafterOptions.ReverseInputFilesOrder ? imageFiles.OrderDescending() : imageFiles.Order();
 
-            int framesAdded = 0;
-            TimeSpan currentFrameTime = TimeSpan.Zero;
+            int frameNumber = 1;
+            CurrentCraftCurrentFrameTime = TimeSpan.Zero;
             foreach (var imageFile in imageFiles)
             {
-                if (CrafterOptions.DebugMode)
-                {
-                    printDebugAction?.Invoke("Start processing frame of file " + imageFile);
-                }
+                printDebugAction?.Invoke("Start processing frame of file " + imageFile);
 
+                var bitmap = ((Bitmap)Bitmap.FromFile(imageFile));
 
-                if (CrafterOptions.UseFramerate)
+                var imageLightness = DarknessDetector.CalculateImageLightness(bitmap);
+                printDebugAction?.Invoke("Frame brightness = " + imageLightness);
+
+                bool isValideLightness = !(imageLightness < 0.2);
+
+                if (!isValideLightness)
                 {
-                    var bitmap = ((Bitmap)Bitmap.FromFile(imageFile));
-                    file.Video.AddFrame(bitmap.ToImageData(out BitmapData? bitLock));
-                    bitmap.UnlockBits(bitLock!);
+                    printDebugAction?.Invoke("Frame brightness is defined as DARK");
                 }
                 else
                 {
-                    var bitmap = ((Bitmap)Bitmap.FromFile(imageFile));
-                    file.Video.AddFrame(bitmap.ToImageData(out BitmapData? bitLock), currentFrameTime);
-                    bitmap.UnlockBits(bitLock!);
-
-                    currentFrameTime += TimeSpan.FromMilliseconds(CrafterOptions.FrameMilliseconds);
+                    printDebugAction?.Invoke("Frame brightness is defined as LIGHT");
+                    AddFrame(file, bitmap);
                 }
 
-                if (CrafterOptions.DebugMode)
-                {
-                    printDebugAction?.Invoke("End processing frame.");
-                }
 
-                framesAdded++;
-                printInfoAction?.Invoke("Added frame " + framesAdded);
+                printInfoAction?.Invoke("Кадр " + frameNumber + " / " + imageFilesCount + (isValideLightness ? " добавлен" : " пропущен"));
+
+                printDebugAction?.Invoke("End processing frame.");
+                frameNumber++;
             }
             return FullFileName;
         }

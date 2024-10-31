@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ImagesToVideoCrafter_ImageProcessor\ImagesToVideoCrafter_ImageProcessor.csproj" />
     <ProjectReference Include="..\ImagesToVideoCrafter_Options\ImagesToVideoCrafter_Options.csproj" />
   </ItemGroup>
 
