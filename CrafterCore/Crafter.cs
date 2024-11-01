@@ -69,8 +69,8 @@ namespace ImagesToVideoCrafter_Core
                     ", ~" + CrafterOptions.Framerate + " fps " + (CrafterOptions.UseFramerate ? "(used)" : "(unused)") +
                     ", " + CrafterOptions.Codec + " codec" +
                     ", " + CrafterOptions.EncoderPresetSpeed + " encoder speed (0 - speed, 8 - size)" +
-                    ", " + CrafterOptions.CRF + " CRF (0 - quality, 51 - size)." +
-                    ", " + CrafterOptions.LightnessThreshold + " lightd";
+                    ", " + CrafterOptions.CRF + " CRF (0 - quality, 51 - size)" +
+                    ", " + CrafterOptions.LightnessThreshold + " lightd.";
             }
             string outputFileName = outputFileNameWithoutExtension + "mp4";
 
@@ -99,7 +99,7 @@ namespace ImagesToVideoCrafter_Core
             {
                 printDebugAction?.Invoke("Start processing frame of file " + imageFile);
 
-                var bitmap = ((Bitmap)Bitmap.FromFile(imageFile));
+                var bitmap = ((Bitmap)Bitmap.FromFile(imageFile));//TODO? uncatched crush with empty file
 
                 var imageLightness = DarknessDetector.CalculateImageLightness(bitmap);
                 printDebugAction?.Invoke("Frame brightness = " + imageLightness);
