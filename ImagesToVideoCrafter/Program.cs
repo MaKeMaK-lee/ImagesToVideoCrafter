@@ -9,6 +9,8 @@ namespace ImagesToVideoCrafter
 {
     public class Program
     {
+        private static StreamWriter? logFileStream;
+
         private static ImagesToVideoCrafterOptions SetOptions(ImagesToVideoCrafterOptions options, string[] args)
         {
             try
@@ -122,21 +124,29 @@ namespace ImagesToVideoCrafter
 
             DateTime startTime = DateTime.Now;
 
+            logFileStream = File.CreateText("latest.log");
+
             var crafter = new Crafter(crafterOptions);
             string FullFileName = crafter.Craft(
-                printInfoAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [INFO] " + s),
-                printWarningAction: (s) => Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [WARN] " + s),
-                printDebugAction: (s) => { if (crafterOptions.DebugMode) Console.WriteLine($"[{DateTime.Now.ToLongTimeString()}] [DEBUG] " + s); }
+                printInfoAction: (s) => Log($"[{DateTime.Now.ToLongTimeString()}] [INFO] " + s),
+                printWarningAction: (s) => Log($"[{DateTime.Now.ToLongTimeString()}] [WARN] " + s),
+                printDebugAction: (s) => { if (crafterOptions.DebugMode) Log($"[{DateTime.Now.ToLongTimeString()}] [DEBUG] " + s); }
                 );
 
             var time = (DateTime.Now - startTime);
-            Console.WriteLine("\n\n\nDone " +
+            Log("\n\n\nDone " +
                 (time.Hours == 0 ? "" : (time.Hours + "h ")) +
                 (time.Minutes == 0 ? "" : (time.Minutes + "m ")) +
                 time.Seconds + "." + time.Milliseconds + "s" +
                 "\n" +
                 "Video saved: " + FullFileName + "\n");
             Console.ReadKey(true);
+        }
+
+        public static void Log(string message)
+        {
+            Console.WriteLine(message);
+            logFileStream!.WriteLine(message);
         }
     }
 }
