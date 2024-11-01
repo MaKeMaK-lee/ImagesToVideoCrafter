@@ -65,11 +65,12 @@ namespace ImagesToVideoCrafter_Core
             {
                 outputFileNameWithoutExtension +=
                     " Options - " + CrafterOptions.Width + "x" + CrafterOptions.Height +
-                    ", ~" + CrafterOptions.FrameMilliseconds + " fps" +
+                    ", ~" + CrafterOptions.FrameMilliseconds + " frT" +
                     ", ~" + CrafterOptions.Framerate + " fps " + (CrafterOptions.UseFramerate ? "(used)" : "(unused)") +
                     ", " + CrafterOptions.Codec + " codec" +
                     ", " + CrafterOptions.EncoderPresetSpeed + " encoder speed (0 - speed, 8 - size)" +
-                    ", " + CrafterOptions.CRF + " CRF (0 - quality, 51 - size).";
+                    ", " + CrafterOptions.CRF + " CRF (0 - quality, 51 - size)." +
+                    ", " + CrafterOptions.LightnessThreshold + " lightd";
             }
             string outputFileName = outputFileNameWithoutExtension + "mp4";
 
@@ -103,7 +104,7 @@ namespace ImagesToVideoCrafter_Core
                 var imageLightness = DarknessDetector.CalculateImageLightness(bitmap);
                 printDebugAction?.Invoke("Frame brightness = " + imageLightness);
 
-                bool isValideLightness = !(imageLightness < 0.2);
+                bool isValideLightness = !(imageLightness < CrafterOptions.LightnessThreshold);
 
                 if (!isValideLightness)
                 {

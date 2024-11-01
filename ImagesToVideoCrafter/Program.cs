@@ -74,6 +74,10 @@ namespace ImagesToVideoCrafter
                             argsEnumerator.MoveNext();
                             options.Codec = (string)argsEnumerator.Current;
                             break;
+                        case "-LightnessThreshold":
+                            argsEnumerator.MoveNext();
+                            options.LightnessThreshold = double.Parse(((string)argsEnumerator.Current).Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture);
+                            break;
                         case "-DebugMode":
                             argsEnumerator.MoveNext();
                             options.DebugMode = bool.Parse((string)argsEnumerator.Current);
@@ -111,6 +115,7 @@ namespace ImagesToVideoCrafter
                 "-Codec","H264" ,
                 "-AddVideoInfoToFilename","false" ,
                 "-DebugMode","true" ,
+                "-LightnessThreshold","0.39" ,
                 ];
 #endif
             var crafterOptions = SetOptions(ImagesToVideoCrafterOptions.Default, args);

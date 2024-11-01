@@ -5,7 +5,7 @@ namespace ImagesToVideoCrafter_Options
     public class ImagesToVideoCrafterOptions
     {
         /// <summary>
-        /// Path to FFMPEG binares (FMPEG shared .dll files: avcodec, avformat, avutil, swresample, swscale). When write this version is 6.x
+        /// Path to FFMPEG binares
         /// </summary>
         public required string FFmpegBinaresDirectory { get; set; }
         public required string OutputVideoName { get; set; }
@@ -13,6 +13,7 @@ namespace ImagesToVideoCrafter_Options
         public required bool AddVideoInfoToFilename { get; set; }
         public required bool ReverseInputFilesOrder { get; set; }
         public required string InputDirectory { get; set; }
+        public required bool DebugMode { get; set; }
 
         public required double FrameMilliseconds { get; set; }
         public required int Framerate { get; set; }
@@ -34,7 +35,8 @@ namespace ImagesToVideoCrafter_Options
         public required short EncoderPresetSpeed { get; set; }
         public required string Codec { get; set; }
 
-        public required bool DebugMode { get; set; }
+        public required double LightnessThreshold { get; set; }
+
 
         /// <returns>
         /// Новый экземпляр со значениями по умолчанию
@@ -61,6 +63,8 @@ namespace ImagesToVideoCrafter_Options
                     CRF = 17,
                     EncoderPresetSpeed = 4,
                     Codec = "H264",
+
+                    LightnessThreshold = 0.2,
 
                 };
             }
