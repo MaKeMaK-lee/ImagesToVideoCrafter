@@ -117,7 +117,7 @@ namespace ImagesToVideoCrafter
                 "-Codec","H264" ,
                 "-AddVideoInfoToFilename","false" ,
                 "-DebugMode","true" ,
-                "-LightnessThreshold","0.39" ,
+                "-LightnessThreshold","0.34" ,
                 ];
 #endif
             var crafterOptions = SetOptions(ImagesToVideoCrafterOptions.Default, args);
