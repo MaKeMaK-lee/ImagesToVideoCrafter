@@ -1,7 +1,7 @@
 ﻿using FFMediaToolkit;
 using FFMediaToolkit.Encoding;
 using ImagesToVideoCrafter_Core.Extensions;
-using ImagesToVideoCrafter_ImageProcessor.DarknessDetection;
+using ImagesToVideoCrafter_ImageProcessor.ImageLightness;
 using ImagesToVideoCrafter_Options;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -11,7 +11,7 @@ namespace ImagesToVideoCrafter_Core
     public class Crafter(ImagesToVideoCrafterOptions? crafterOptions = null)
     {
         private TimeSpan CurrentCraftCurrentFrameTime;
-        private readonly DarknessDetector DarknessDetector = new();
+        private readonly ImageLightnessCalculator DarknessDetector = new();
 
         public ImagesToVideoCrafterOptions CrafterOptions { get; private set; } = crafterOptions ?? ImagesToVideoCrafterOptions.Default;
 

@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace ImagesToVideoCrafter_ImageProcessor.DarknessDetection
+namespace ImagesToVideoCrafter_ImageProcessor.ImageLightness
 {
-    public class DarknessDetector
+    public class ImageLightnessCalculator
     {
         public double CalculateImageLightness(Bitmap bitmap)
         {
