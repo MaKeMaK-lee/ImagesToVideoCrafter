@@ -1,5 +1,6 @@
 ﻿using ImagesToVideoCrafter_DesktopGUI.Core;
-using ImagesToVideoCrafter_DesktopGUI.MVVM.View;
+using ImagesToVideoCrafter_DesktopGUI.MVVM.Model;
+using ImagesToVideoCrafter_DesktopGUI.MVVM.Model;
 using ImagesToVideoCrafter_DesktopGUI.MVVM.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
@@ -17,14 +18,24 @@ namespace ImagesToVideoCrafter_DesktopGUI
         {
             IServiceCollection services = new ServiceCollection();
 
-            services.AddSingleton<MainView>(provider => new MainView
+            services.AddSingleton<MainWindow>(provider => new MainWindow
             {
-                DataContext = provider.GetRequiredService<MainViewModel>(),
+                DataContext = provider.GetRequiredService<MainViewModel>()
             });
-            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<MainViewModel>(provider => new MainViewModel(
+                provider.GetRequiredService<INavigation>(),
+                provider.GetRequiredService<IAdapter>(),
+                provider.GetRequiredService<IGuiInstance>(),
+                Dispatcher
+                ));
+            services.AddSingleton<HomeViewModel>();
             services.AddSingleton<Func<Type, ViewModel>>
                 (serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
             services.AddSingleton<INavigation, Navigation>();
+
+            services.AddSingleton<IAdapter, Adapter>();
+
+            services.AddSingleton<IGuiInstance, GuiInstance>();
 
 
 
@@ -39,8 +50,7 @@ namespace ImagesToVideoCrafter_DesktopGUI
         }
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var mainWindow = _serviceProvider.GetRequiredService<MainView>();
-
+            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
 
             mainWindow.Show();
         }

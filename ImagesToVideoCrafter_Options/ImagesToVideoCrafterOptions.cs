@@ -70,6 +70,11 @@ namespace ImagesToVideoCrafter_Options
             }
         }
 
+        public static ImagesToVideoCrafterOptions? FromJson(string jsonString)
+        {
+            return JsonSerializer.Deserialize<ImagesToVideoCrafterOptions>(jsonString);
+        }
+
         public string GetJson()
         {
             return JsonSerializer.Serialize(this, options: new()

@@ -42,14 +42,14 @@ namespace ImagesToVideoCrafter_Core
             outputFileNameWithoutExtension ??= CrafterOptions.OutputVideoName;
             if (!CrafterOptions.UseFramerate)
             {
-                printInfoAction?.Invoke("При использовании времени на кадр FrameMilliseconds вместо частоты кадров Framerate (UseFramerate = true)" +
-                    " из-за проблемы точности чисел с плавающей запятой может возникать ошибка. " +
-                    "\nЭтого возможно избежать повывсив Framerate, но это может сказаться на результате. " +
-                    "(Хотя вроде не должно, я прост не шарю в видео кодеках на 100%, а тестирование провожу крайне ограниченное).");
+                //printInfoAction?.Invoke("При использовании времени на кадр FrameMilliseconds вместо частоты кадров Framerate (UseFramerate = true)" +
+                //    " из-за проблемы точности чисел с плавающей запятой может возникать ошибка. " +
+                //    "\nЭтого возможно избежать повывсив Framerate, но это может сказаться на результате. " +
+                //    "(Хотя вроде не должно, я прост не шарю в видео кодеках на 100%, а тестирование провожу крайне ограниченное).");
                 if (CrafterOptions.Framerate < (1000d / CrafterOptions.FrameMilliseconds))
                 {
                     CrafterOptions.Framerate = ((int)Math.Ceiling(1000d / CrafterOptions.FrameMilliseconds)) + 1;
-                    printWarningAction?.Invoke("Заданная комбинация параметров UseFramerate, Framerate и FrameMilliseconds скорее всего ввызвала бы ошибку." +
+                    printInfoAction?.Invoke("Заданная комбинация параметров UseFramerate, Framerate и FrameMilliseconds скорее всего ввызвала бы ошибку." +
                         " Параметр Framerate был скорректирован. \nFramerate = " + CrafterOptions.Framerate);
                 }
             }
@@ -79,7 +79,9 @@ namespace ImagesToVideoCrafter_Core
             Directory.CreateDirectory(CrafterOptions.InputDirectory);
             string FullFileName = Path.Combine(CrafterOptions.OutputDirectory, outputFileName);
 
-            FFmpegLoader.FFmpegPath = CrafterOptions.FFmpegBinaresDirectory;
+            if (FFmpegLoader.FFmpegPath != CrafterOptions.FFmpegBinaresDirectory)
+                FFmpegLoader.FFmpegPath = CrafterOptions.FFmpegBinaresDirectory;
+
 
             var settings = CrafterOptions.GetVideoEncoderSettings();
 

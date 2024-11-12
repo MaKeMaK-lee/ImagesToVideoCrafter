@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CrafterCore\ImagesToVideoCrafter_Core.csproj" />
+    <ProjectReference Include="..\ImagesToVideoCrafter_Core\ImagesToVideoCrafter_Core.csproj" />
     <ProjectReference Include="..\ImagesToVideoCrafter_Options\ImagesToVideoCrafter_Options.csproj" />
   </ItemGroup>
 

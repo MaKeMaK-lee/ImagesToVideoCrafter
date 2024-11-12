@@ -1,7 +1,7 @@
 ﻿
 using System.Windows.Input;
 
-namespace Makman.Visual.Core
+namespace ImagesToVideoCrafter_DesktopGUI.Core
 {
     public class RelayCommand(Action<object?> execute, Predicate<object?> canExecute) : ICommand
     {

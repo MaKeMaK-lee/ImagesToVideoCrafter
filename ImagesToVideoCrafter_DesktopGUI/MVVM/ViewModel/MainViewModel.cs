@@ -1,61 +1,114 @@
-﻿
-using Makman.Visual.Core;
-using System.Windows;
-using ImagesToVideoCrafter_DesktopGUI.Core;
+﻿using ImagesToVideoCrafter_DesktopGUI.Core;
+using ImagesToVideoCrafter_DesktopGUI.MVVM.Model;
+using System.Windows.Threading;
 
 namespace ImagesToVideoCrafter_DesktopGUI.MVVM.ViewModel
 {
     public class MainViewModel : Core.ViewModel
     {
+        public int LogMaxHeight => WindowHeight - contentControlMinHeight - 20;
+
+        private int contentControlMinHeight;
+        public int ContentControlMinHeight
+        {
+            get => contentControlMinHeight;
+            set
+            {
+                contentControlMinHeight = value;
+                OnPropertyChanged(nameof(ContentControlMinHeight));
+                OnPropertyChanged(nameof(LogMaxHeight));
+            }
+        }
+
+        private int windowHeight;
+        public int WindowHeight
+        {
+            get => windowHeight;
+            set
+            {
+                windowHeight = value;
+                OnPropertyChanged(nameof(WindowHeight));
+                OnPropertyChanged(nameof(LogMaxHeight));
+            }
+        }
+
+        private string logText;
+        public string LogText
+        {
+            get => logText;
+            set
+            {
+                logText = value;
+                OnPropertyChanged(nameof(LogText));
+            }
+        }
+
+        private Dispatcher _currentDispatcher;
+        public Dispatcher CurrentDispatcher
+        {
+            get => _currentDispatcher;
+            set
+            {
+                _currentDispatcher = value;
+                OnPropertyChanged(nameof(CurrentDispatcher));
+            }
+        }
 
         private INavigation _navigation;
-
         public INavigation Navigation
         {
             get => _navigation;
             set
             {
                 _navigation = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Navigation));
             }
         }
 
-        public bool debugMode = false;
-        public bool DebugMode
+        private IGuiInstance _guiInstance;
+        public IGuiInstance GuiInstance
         {
-            get => debugMode;
+            get => _guiInstance;
             set
             {
-                debugMode = value;
-                OnPropertyChanged(nameof(DebugMode));
-                OnPropertyChanged(nameof(DebugNavigationVisibility));
+                _guiInstance = value;
+                OnPropertyChanged(nameof(GuiInstance));
             }
         }
 
-        public Visibility DebugNavigationVisibility => debugMode ? Visibility.Visible : Visibility.Collapsed;
+        public Action<string> LogAppendTextAction { get; set; }
 
-        public RelayCommand KeyDownF3Command { get; set; }
-
-        //public RelayCommand NavigateToHomeCommand { get; set; } 
-
-        public MainViewModel(INavigation navigationService)
+        public RelayCommand StartCraftingCommand { get; set; }
+        public RelayCommand NavigateToHomeCommand { get; set; }
+        private void SetCommands()
         {
-
-            Navigation = navigationService;
-            //NavigateToHomeCommand = new RelayCommand(o =>
-            //{
-            //    Navigation.NavigateTo<HomeViewModel>();
-            //}, o => true);
-
-            KeyDownF3Command = new RelayCommand(o =>
+            NavigateToHomeCommand = new RelayCommand(o =>
             {
-                if (DebugMode)
-                    DebugMode = false;
-                else
-                    DebugMode = true;
+                Navigation.NavigateTo<HomeViewModel>();
             }, o => true);
+            StartCraftingCommand = new RelayCommand(o =>
+            {
+                _guiInstance.Craft();
+            }, o => true);
+        }
+        public MainViewModel(INavigation navigationService, IAdapter adapter, IGuiInstance guiInstance, Dispatcher dispatcher)
+        {
+            CurrentDispatcher = dispatcher;
+            GuiInstance = guiInstance;
+            Navigation = navigationService;
 
-            //Navigation.NavigateTo<MainViewModel>();
+            ContentControlMinHeight = 145;
+
+            SetCommands();
+            GuiInstance.AddLogAction((o, s) =>
+            {
+                CurrentDispatcher.Invoke(() =>
+                {
+                    LogAppendTextAction?.Invoke('\n' + s);
+                });
+            });
+
+            Navigation.NavigateTo<HomeViewModel>();
         }
     }
 }

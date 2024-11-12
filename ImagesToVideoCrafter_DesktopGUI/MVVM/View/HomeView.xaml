@@ -1,0 +1,172 @@
+﻿<UserControl x:Class="ImagesToVideoCrafter_DesktopGUI.MVVM.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:localization="clr-namespace:ImagesToVideoCrafter_DesktopGUI.Localization"
+             xmlns:local="clr-namespace:ImagesToVideoCrafter_DesktopGUI.MVVM.View"
+             xmlns:viewmodel="clr-namespace:ImagesToVideoCrafter_DesktopGUI.MVVM.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800" Background="Transparent" MinHeight="100" >
+    <Grid>
+        <ScrollViewer Margin="5" VerticalContentAlignment="Top" VerticalAlignment="Top"
+              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <Grid VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*" MinWidth="320"/>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="75*" MinWidth="300"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <GridSplitter Background="#06000000" Grid.Column="1" Grid.RowSpan="16" ShowsPreview="True" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_OutputDirectory_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_OutputDirectory_description}"
+                       Grid.Row="0"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.OutputDirectory}"
+                     Grid.Row="0"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_InputDirectory_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_InputDirectory_description}"
+                       Grid.Row="1"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.InputDirectory}"
+                     Grid.Row="1"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_FFmpegBinaresDirectory_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_FFmpegBinaresDirectory_description}"
+                       Grid.Row="2"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.FFmpegBinaresDirectory}"
+                     Grid.Row="2"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_ReverseInputFilesOrder_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_ReverseInputFilesOrder_description}"
+                       Grid.Row="3"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.ReverseInputFilesOrder}"
+                     Grid.Row="3"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_OutputVideoName_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_OutputVideoName_description}"
+                       Grid.Row="4"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.OutputVideoName}"
+                     Grid.Row="4"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_AddVideoInfoToFilename_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_AddVideoInfoToFilename_description}"
+                       Grid.Row="5"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.AddVideoInfoToFilename}"
+                     Grid.Row="5"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_DebugMode_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_DebugMode_description}"
+                       Grid.Row="6"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.DebugMode}"
+                     Grid.Row="6"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_FrameMilliseconds_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_FrameMilliseconds_description}"
+                       Grid.Row="7"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.FrameMilliseconds}"
+                     Grid.Row="7"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_Framerate_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_Framerate_description}"
+                       Grid.Row="8"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.Framerate}"
+                     Grid.Row="8"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_UseFramerate_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_UseFramerate_description}"
+                       Grid.Row="9"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.UseFramerate}"
+                     Grid.Row="9"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_CRF_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_CRF_description}"
+                       Grid.Row="10"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.CRF}"
+                     Grid.Row="10"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_EncoderPresetSpeed_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_EncoderPresetSpeed_description}"
+                       Grid.Row="11"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.EncoderPresetSpeed}"
+                     Grid.Row="11"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_Codec_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_Codec_description}"
+                       Grid.Row="12"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.Codec}"
+                     Grid.Row="12"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_Width_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_Width_description}"
+                       Grid.Row="13"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.Width}"
+                     Grid.Row="13"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_Height_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_Height_description}"
+                       Grid.Row="14"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.Height}"
+                     Grid.Row="14"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+                <TextBlock Text="{x:Static localization:UIText.options_craft_LightnessThreshold_name}"
+                       ToolTip="{x:Static localization:UIText.options_craft_LightnessThreshold_description}"
+                       Grid.Row="15"
+                       Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
+                <TextBox Text="{Binding Options.LightnessThreshold}"
+                     Grid.Row="15"
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+
+
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

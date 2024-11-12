@@ -12,7 +12,6 @@
                               Background="{TemplateBinding Background}">
 
                             <TextBlock Text="{TemplateBinding Property=Content}"
-                                       FontFamily="/Visual/Fonts/#Protest Revolution"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        />
