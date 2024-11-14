@@ -48,7 +48,7 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.Model
                         (time.Hours == 0 ? "" : (time.Hours + "h ")) +
                         (time.Minutes == 0 ? "" : (time.Minutes + "m ")) +
                         time.Seconds + "." + time.Milliseconds + "s", LogMode.INFO);
-                    LogAs("Видео сохранено: " + t.Result + "\n", LogMode.INFO);
+                    LogAs("Видео сохранено: " + Path.GetFullPath(t.Result) + "\n", LogMode.INFO);
                 });
         }
 
