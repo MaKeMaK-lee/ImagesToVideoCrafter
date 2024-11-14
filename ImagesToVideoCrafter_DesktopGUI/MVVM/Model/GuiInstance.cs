@@ -55,7 +55,7 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.Model
         public void LogAs(string message, LogMode? logMode = null)
         {
             var str =
-                $"[{DateTime.Now.ToLongTimeString()}] " + //TODO 00:00:00
+                $"[{DateTime.Now.ToString("hh:mm:ss")}] " +
                 $"[{(logMode.HasValue ? logMode.Value : "")}] " +
                 message;
 
