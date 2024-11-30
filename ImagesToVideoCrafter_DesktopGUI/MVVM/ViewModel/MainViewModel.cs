@@ -6,20 +6,6 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.ViewModel
 {
     public class MainViewModel : Core.ViewModel
     {
-        public int LogMaxHeight => WindowHeight - contentControlMinHeight - 20;
-
-        private int contentControlMinHeight;
-        public int ContentControlMinHeight
-        {
-            get => contentControlMinHeight;
-            set
-            {
-                contentControlMinHeight = value;
-                OnPropertyChanged(nameof(ContentControlMinHeight));
-                OnPropertyChanged(nameof(LogMaxHeight));
-            }
-        }
-
         private int windowHeight;
         public int WindowHeight
         {
@@ -28,29 +14,6 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.ViewModel
             {
                 windowHeight = value;
                 OnPropertyChanged(nameof(WindowHeight));
-                OnPropertyChanged(nameof(LogMaxHeight));
-            }
-        }
-
-        private string logText;
-        public string LogText
-        {
-            get => logText;
-            set
-            {
-                logText = value;
-                OnPropertyChanged(nameof(LogText));
-            }
-        }
-
-        private Dispatcher _currentDispatcher;
-        public Dispatcher CurrentDispatcher
-        {
-            get => _currentDispatcher;
-            set
-            {
-                _currentDispatcher = value;
-                OnPropertyChanged(nameof(CurrentDispatcher));
             }
         }
 
@@ -76,37 +39,43 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.ViewModel
             }
         }
 
-        public Action<string> LogAppendTextAction { get; set; }
+        public bool IsCheckedNavigateToHomeRadio => Navigation?.CurrentView?.GetType() == typeof(HomeViewModel) ? true : false;
+        public bool IsCheckedNavigateToLogRadio => Navigation?.CurrentView?.GetType() == typeof(LogViewModel) ? true : false;
 
         public RelayCommand StartCraftingCommand { get; set; }
         public RelayCommand NavigateToHomeCommand { get; set; }
+        public RelayCommand NavigateToLogCommand { get; set; }
+
         private void SetCommands()
         {
+            NavigateToLogCommand = new RelayCommand(o =>
+            {
+                Navigation.NavigateTo<LogViewModel>();
+            }, o => true);
             NavigateToHomeCommand = new RelayCommand(o =>
             {
                 Navigation.NavigateTo<HomeViewModel>();
             }, o => true);
             StartCraftingCommand = new RelayCommand(o =>
             {
+                Navigation.NavigateTo<LogViewModel>();
                 _guiInstance.Craft();
             }, o => true);
         }
-        public MainViewModel(INavigation navigationService, IAdapter adapter, IGuiInstance guiInstance, Dispatcher dispatcher)
+
+        public MainViewModel(INavigation navigationService, IAdapter adapter, IGuiInstance guiInstance)
         {
-            CurrentDispatcher = dispatcher;
             GuiInstance = guiInstance;
             Navigation = navigationService;
 
-            ContentControlMinHeight = 145;
+            Navigation.AddNavigationChangedHandler((o, e) =>
+            {
+                OnPropertyChanged(nameof(IsCheckedNavigateToHomeRadio));
+                OnPropertyChanged(nameof(IsCheckedNavigateToLogRadio));
+
+            });
 
             SetCommands();
-            GuiInstance.AddLogAction((o, s) =>
-            {
-                CurrentDispatcher.Invoke(() =>
-                {
-                    LogAppendTextAction?.Invoke('\n' + s);
-                });
-            });
 
             Navigation.NavigateTo<HomeViewModel>();
         }

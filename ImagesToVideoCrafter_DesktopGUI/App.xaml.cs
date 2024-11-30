@@ -22,13 +22,14 @@ namespace ImagesToVideoCrafter_DesktopGUI
             {
                 DataContext = provider.GetRequiredService<MainViewModel>()
             });
-            services.AddSingleton<MainViewModel>(provider => new MainViewModel(
+            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<LogViewModel>(provider => new LogViewModel(
                 provider.GetRequiredService<INavigation>(),
                 provider.GetRequiredService<IAdapter>(),
                 provider.GetRequiredService<IGuiInstance>(),
                 Dispatcher
                 ));
-            services.AddSingleton<HomeViewModel>();
             services.AddSingleton<Func<Type, ViewModel>>
                 (serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
             services.AddSingleton<INavigation, Navigation>();

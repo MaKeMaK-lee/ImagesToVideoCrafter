@@ -18,7 +18,11 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.Extensions.Behaviors
 
         protected override void OnAttached()
         {
-            SetCurrentValue(AppendTextActionProperty, (Action<string>)AssociatedObject.AppendText);
+            SetCurrentValue(AppendTextActionProperty, (Action<string>) (s =>
+            {
+                AssociatedObject.AppendText(s);
+                AssociatedObject.ScrollToEnd();
+            }));
             base.OnAttached();
         }
     }

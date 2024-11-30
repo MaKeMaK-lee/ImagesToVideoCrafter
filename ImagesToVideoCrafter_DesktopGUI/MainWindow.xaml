@@ -38,29 +38,34 @@
 
             <StackPanel Grid.Row="2">
 
+                <RadioButton Content="Журнал"
+                             Height="50"
+                             Foreground="WhiteSmoke"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="{Binding IsCheckedNavigateToLogRadio, Mode=OneWay}"
+                             Command="{Binding NavigateToLogCommand}"/>
                 <RadioButton Content="Настройки"
                              Height="50"
                              Foreground="WhiteSmoke"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             IsChecked="True"
+                             IsChecked="{Binding IsCheckedNavigateToHomeRadio, Mode=OneWay}"
                              Command="{Binding NavigateToHomeCommand}"/>
             </StackPanel>
 
-            <!--<ScrollViewer Grid.Column="1" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto" >-->
             <Grid Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="75" MinHeight="75" MaxHeight="{Binding LogMaxHeight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <RowDefinition Height="75" MinHeight="75" MaxHeight="122"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition MinHeight="{Binding ContentControlMinHeight, Mode=OneWay}" />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <GridSplitter Background="#20000000" Grid.Row="1" Grid.ColumnSpan="2" MaxWidth="225"
                               ShowsPreview="True" Height="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
-
 
                 <Button Grid.Row="0" Command="{Binding StartCraftingCommand}" Foreground="#80FFFFFF"
                         Background="#10FFFFFF" BorderThickness="1" BorderBrush="#20000000"
@@ -68,28 +73,12 @@
                         VerticalContentAlignment="Center" VerticalAlignment="Bottom"
                         FontSize="36" Margin="10,0,10,5" Padding="8,0,5,5"
                         Content="Запуск ▷"/>
-                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Grid.Column="1" Margin="5,10,15,5">
-                    <TextBox Background="#22000000" Text="{Binding LogText, Mode=OneWay}"
-                             
-                             TextWrapping="Wrap" IsReadOnly="True"
-                             FontFamily="Arial" FontSize="14"
-                             HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom"
-                             ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" >
-
-                        <behaviors:Interaction.Behaviors>
-                            <behaviorsEx:AppendTextBehavior AppendTextAction="{Binding LogAppendTextAction, Mode=OneWayToSource}" />
-                        </behaviors:Interaction.Behaviors>
-                    </TextBox>
-                </ScrollViewer>
 
                 <ContentControl Grid.ColumnSpan="2" Grid.Row="2"
                             Margin="10"
                             Content="{Binding Navigation.CurrentView}" />
             </Grid>
-            <!--</ScrollViewer>-->
-
 
         </Grid>
-
     </Border>
 </Window>

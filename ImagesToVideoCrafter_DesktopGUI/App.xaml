@@ -16,6 +16,10 @@
                 <view:HomeView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:LogViewModel}">
+                <view:LogView/>
+            </DataTemplate>
+
 
 
 
