@@ -31,7 +31,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="Margin" Value="5,0,10,0"/>
+            <Setter Property="Margin" Value="5,0,15,0"/>
             <Setter Property="Height" Value="28"/>
 
             <Setter Property="FontSize" Value="18"/>

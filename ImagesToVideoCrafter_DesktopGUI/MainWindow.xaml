@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:ImagesToVideoCrafter_DesktopGUI.MVVM.ViewModel"
-        xmlns:view="clr-namespace:ImagesToVideoCrafter_DesktopGUI.MVVM.View" 
+        xmlns:view="clr-namespace:ImagesToVideoCrafter_DesktopGUI.MVVM.View"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:ImagesToVideoCrafter_DesktopGUI" xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors" xmlns:behaviorsEx="clr-namespace:ImagesToVideoCrafter_DesktopGUI.MVVM.Extensions.Behaviors"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -39,14 +40,14 @@
             <StackPanel Grid.Row="2">
 
                 <RadioButton Content="Журнал"
-                             Height="50"
+                             Height="50" HorizontalAlignment="Stretch"
                              Foreground="WhiteSmoke"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              IsChecked="{Binding IsCheckedNavigateToLogRadio, Mode=OneWay}"
                              Command="{Binding NavigateToLogCommand}"/>
                 <RadioButton Content="Настройки"
-                             Height="50"
+                             Height="50" HorizontalAlignment="Stretch"
                              Foreground="WhiteSmoke"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
@@ -70,8 +71,8 @@
                 <Button Grid.Row="0" Command="{Binding StartCraftingCommand}" Foreground="#80FFFFFF"
                         Background="#10FFFFFF" BorderThickness="1" BorderBrush="#20000000"
                         HorizontalContentAlignment="Center" HorizontalAlignment="Right"
-                        VerticalContentAlignment="Center" VerticalAlignment="Bottom"
-                        FontSize="36" Margin="10,0,10,5" Padding="8,0,5,5"
+                        VerticalContentAlignment="Center" VerticalAlignment="Center"
+                        Margin="10,0,10,5" Padding="8,3,5,5" 
                         Content="Запуск ▷"/>
 
                 <ContentControl Grid.ColumnSpan="2" Grid.Row="2"

@@ -65,9 +65,10 @@
                        ToolTip="{x:Static localization:UIText.options_craft_ReverseInputFilesOrder_description}"
                        Grid.Row="3"
                        Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
-                <TextBox Text="{Binding Options.ReverseInputFilesOrder}"
-                     Grid.Row="3"
-                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+                <CheckBox IsChecked="{Binding Options.ReverseInputFilesOrder}"
+                          Margin="10,0,0,0" HorizontalAlignment="Stretch"
+                          Grid.Row="3" Grid.Column="2"
+                          />
 
                 <TextBlock Text="{x:Static localization:UIText.options_craft_OutputVideoName_name}"
                        ToolTip="{x:Static localization:UIText.options_craft_OutputVideoName_description}"
@@ -81,17 +82,19 @@
                        ToolTip="{x:Static localization:UIText.options_craft_AddVideoInfoToFilename_description}"
                        Grid.Row="5"
                        Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
-                <TextBox Text="{Binding Options.AddVideoInfoToFilename}"
-                     Grid.Row="5"
-                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+                <CheckBox IsChecked="{Binding Options.AddVideoInfoToFilename}"
+                          Margin="10,0,0,0" HorizontalAlignment="Stretch"
+                          Grid.Row="5" Grid.Column="2"
+                          />
 
                 <TextBlock Text="{x:Static localization:UIText.options_craft_DebugMode_name}"
                        ToolTip="{x:Static localization:UIText.options_craft_DebugMode_description}"
                        Grid.Row="6"
                        Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
-                <TextBox Text="{Binding Options.DebugMode}"
-                     Grid.Row="6"
-                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+                <CheckBox IsChecked="{Binding Options.DebugMode}"
+                          Margin="10,0,0,0" HorizontalAlignment="Stretch"
+                          Grid.Row="6" Grid.Column="2"
+                          />
 
                 <TextBlock Text="{x:Static localization:UIText.options_craft_FrameMilliseconds_name}"
                        ToolTip="{x:Static localization:UIText.options_craft_FrameMilliseconds_description}"
@@ -107,15 +110,16 @@
                        Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
                 <TextBox Text="{Binding Options.Framerate}"
                      Grid.Row="8"
-                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}" />
 
                 <TextBlock Text="{x:Static localization:UIText.options_craft_UseFramerate_name}"
                        ToolTip="{x:Static localization:UIText.options_craft_UseFramerate_description}"
                        Grid.Row="9"
                        Grid.Column="0" Style="{StaticResource OptionDescription_OptionsList_TextBlock}" />
-                <TextBox Text="{Binding Options.UseFramerate}"
-                     Grid.Row="9"
-                     Grid.Column="2" Style="{StaticResource OptionDescription_OptionsList_TextBox}"/>
+                <CheckBox IsChecked="{Binding Options.UseFramerate}"
+                          Margin="10,0,0,0" HorizontalAlignment="Stretch"
+                          Grid.Row="9" Grid.Column="2"
+                          />
 
                 <TextBlock Text="{x:Static localization:UIText.options_craft_CRF_name}"
                        ToolTip="{x:Static localization:UIText.options_craft_CRF_description}"
