@@ -12,7 +12,8 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.Model
         private IAdapter _adapter;
         private TextWriter logFileStream;
 
-        private event EventHandler<string>? LogActions;
+        private event Action<int, int>? ProgressCountUpdateActions;
+        private event Action<string>? LogActions;
 
         public enum LogMode
         {
@@ -36,6 +37,7 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.Model
 
             var craftTask = _adapter
                 .LaunchCraft(CrafterOptions,
+                setProgressCountAction: (a, b) => ProgressCountUpdateActions?.Invoke(a, b),
                 printInfoAction: (s) => LogAs(s, LogMode.INFO),
                 printWarningAction: (s) => LogAs(s, LogMode.WARN),
                 printDebugAction: (s) => { if (CrafterOptions.DebugMode) LogAs(s, LogMode.DEBUG); })
@@ -59,10 +61,15 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.Model
                 $"[{(logMode.HasValue ? logMode.Value : "")}] " +
                 message;
 
-            LogActions?.Invoke(null, str);
+            LogActions?.Invoke(str);
         }
 
-        public void AddLogAction(EventHandler<string> action)
+        public void AddProgressCountUpdateAction(Action<int, int> action)
+        {
+            ProgressCountUpdateActions += action;
+        }
+
+        public void AddLogAction(Action<string> action)
         {
             LogActions += action;
         }
@@ -79,7 +86,7 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.Model
             logFileStream = TextWriter.Synchronized(File.CreateText("latest.log"));
             CrafterOptions = ImagesToVideoCrafterOptions.Default.ToOptionsObservable();
 
-            LogActions += (o, message) =>
+            LogActions += message =>
             {
                 logFileStream?.WriteLine(message);
                 logFileStream?.Flush();
@@ -89,7 +96,7 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.Model
             string username = WindowsIdentity.GetCurrent().Name.Split('\\')[1];
             CrafterOptions.FFmpegBinaresDirectory = "C:\\Users\\" + username + "\\Desktop\\ffmpeg\\x86_64";
 
-            LogActions += (o, message) => Debug.WriteLine(message);
+            LogActions += message => Debug.WriteLine(message);
 #endif
         }
     }

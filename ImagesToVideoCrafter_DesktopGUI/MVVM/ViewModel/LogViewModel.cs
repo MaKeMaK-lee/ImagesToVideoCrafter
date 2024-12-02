@@ -44,7 +44,7 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.ViewModel
 
             SetCommands();
 
-            _guiInstance.AddLogAction((o, s) =>
+            _guiInstance.AddLogAction(s =>
             {
                 CurrentDispatcher.Invoke(() =>
                 {

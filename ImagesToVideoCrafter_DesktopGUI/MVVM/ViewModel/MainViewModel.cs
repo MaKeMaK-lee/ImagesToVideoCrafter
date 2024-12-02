@@ -6,6 +6,18 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.ViewModel
 {
     public class MainViewModel : Core.ViewModel
     {
+        private double mainProgressPercent;
+        public double MainProgressPercent
+        {
+            get => mainProgressPercent;
+        }
+
+        public void SetMainProgressPercent(int countReady, int countAll)
+        {
+            mainProgressPercent = ((double)countReady / countAll) * 100;
+            OnPropertyChanged(nameof(MainProgressPercent));
+        }
+
         private int windowHeight;
         public int WindowHeight
         {
@@ -76,6 +88,10 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.ViewModel
             });
 
             SetCommands();
+
+            GuiInstance.AddProgressCountUpdateAction(SetMainProgressPercent);
+
+
 
             Navigation.NavigateTo<HomeViewModel>();
         }

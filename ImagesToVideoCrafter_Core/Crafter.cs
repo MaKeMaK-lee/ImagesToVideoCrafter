@@ -32,6 +32,7 @@ namespace ImagesToVideoCrafter_Core
         }
 
         public string Craft(string? outputFileNameWithoutExtension = null, bool addDateTimeToFilename = true,
+            Action<int, int>? setProgressCountAction = null,
             Action<string>? printInfoAction = null,
             Action<string>? printWarningAction = null,
             Action<string>? printDebugAction = null)
@@ -120,6 +121,7 @@ namespace ImagesToVideoCrafter_Core
 
 
                 printInfoAction?.Invoke("Кадр " + frameNumber + " / " + imageFilesCount + (isValideLightness ? " добавлен" : " пропущен"));
+                setProgressCountAction?.Invoke(frameNumber, imageFilesCount);
 
                 printDebugAction?.Invoke("End processing frame.");
                 frameNumber++;

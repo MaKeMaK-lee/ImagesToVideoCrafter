@@ -75,6 +75,8 @@
                         Margin="10,0,10,5" Padding="8,3,5,5" 
                         Content="Запуск ▷"/>
 
+                <ProgressBar Height="15" Margin="15" Value="{Binding MainProgressPercent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="0" />
+
                 <ContentControl Grid.ColumnSpan="2" Grid.Row="2"
                             Margin="10"
                             Content="{Binding Navigation.CurrentView}" />

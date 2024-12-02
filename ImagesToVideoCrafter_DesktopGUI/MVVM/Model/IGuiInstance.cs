@@ -12,6 +12,7 @@ namespace ImagesToVideoCrafter_DesktopGUI.MVVM.Model
     {
         public void Craft();
         public ImagesToVideoCrafterOptionsObservable CrafterOptions { get; }
-        public void AddLogAction(EventHandler<string> action);
+        public void AddLogAction(Action<string> action);
+        public void AddProgressCountUpdateAction(Action<int, int> action);
     }
 }
